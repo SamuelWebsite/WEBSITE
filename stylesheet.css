@@ -1,0 +1,72 @@
+body {
+    font-family: "Comic sans MS";
+    margin: 0;
+    height: 100vh;
+    animation: rainbow 10s linear infinite;
+
+}
+
+
+@keyframes rainbow {
+    0%    { background-color: red; }
+    14%   { background-color: orange; }
+    28%   { background-color: yellow; }
+    42%   { background-color: green; }
+    57%   { background-color: blue; }
+    71%   { background-color: purple; }
+    85%   { background-color: pink; }
+    100%  { background-color: red; }
+}
+
+p {
+    color :aqua;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+
+}
+
+p :hover {
+    opacity: 0
+}
+
+
+h1, h3 {
+    color :chartreuse
+}
+
+p, h1, h3 {
+    border-radius: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width:fit-content;
+    height: fit-content;
+    animation: fart 10s linear infinite ;
+}
+
+@keyframes fart {
+    0%    { background-color: red; box-shadow: 0 0 20px yellow;}
+    14%   { background-color: pink; box-shadow: 0 0 20px green; }
+    28%   { background-color: purple; box-shadow: 0 0 20px blue; }
+    42%   { background-color: blue; box-shadow: 0 0 20px purple;}
+    57%   { background-color: green; box-shadow: 0 0 20px pink;}
+    71%   { background-color: yellow; box-shadow: 0 0 20px red;}
+    85%   { background-color: orange; box-shadow: 0 0 20px orange;}
+    100%  { background-color: red; box-shadow: 0 0 20px yellow;}
+}
+
+
+.zigounetteauvent {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    height: auto;
+    animation : mazeltov 10s linear infinite
+}
+
+@keyframes mazeltov {
+    0%    { right: 0; }
+    50%   { right: 100vw; }
+    100%  { right: 0; }
+}
