@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte à rebours vacances d'été</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+        }
+        
+        h1 {
+            font-size: 4em;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        .percentage {
+            color: #667eea;
+            font-size: 1.3em;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 40px;
+            background: #e0e0e0;
+            border-radius: 20px;
+            margin-top: 30px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            transition: width 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .info {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .emoji {
+            font-size: 3em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nous sommes à <span class="percentage" id="percentage">0</span> % des vacances d'été</h1>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+        
+        <div class="info" id="info"></div>
+        <div class="emoji" id="emoji"></div>
+    </div>
+
+    <script>
+        function calculateProgress() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            
+            // Zone C (Rambouillet, Yvelines) - Année scolaire 2024-2025
+            // Rentrée: 2 septembre 2024
+            // Vacances d'été: 5 juillet 2025
+            
+            let rentree, vacancesEte;
+            
+            // Si on est après juillet, on considère l'année scolaire suivante
+            if (now.getMonth() >= 7) {
+                rentree = new Date(currentYear, 8, 2); // 2 septembre année en cours
+                vacancesEte = new Date(currentYear + 1, 6, 5); // 5 juillet année suivante
+            } else {
+                rentree = new Date(currentYear - 1, 8, 2); // 2 septembre année précédente
+                vacancesEte = new Date(currentYear, 6, 5); // 5 juillet année en cours
+            }
+            
+            const totalTime = vacancesEte - rentree;
+            const elapsedTime = now - rentree;
+            const percentage = Math.min(Math.max((elapsedTime / totalTime) * 100, 0), 100);
+            
+            const daysRemaining = Math.ceil((vacancesEte - now) / (1000 * 60 * 60 * 24));
+            
+            // Mise à jour de l'affichage
+            document.getElementById('percentage').textContent = percentage.toFixed(1);
+            document.getElementById('progressBar').style.width = percentage + '%';
+            
+            let infoText = '';
+            let emoji = '';
+            
+            if (percentage >= 100) {
+                infoText = '🎉 C\'est les vacances ! 🎉';
+                emoji = '🏖️☀️🌴';
+            } else if (percentage >= 90) {
+                infoText = `Plus que ${daysRemaining} jours !`;
+                emoji = '🎊';
+            } else if (percentage >= 50) {
+                infoText = `Encore ${daysRemaining} jours avant les vacances`;
+                emoji = '😊';
+            } else {
+                infoText = `${daysRemaining} jours avant les vacances d'été`;
+                emoji = '📚';
+            }
+            
+            document.getElementById('info').textContent = infoText;
+            document.getElementById('emoji').textContent = emoji;
+        }
+        
+        // Calculer au chargement
+        calculateProgress();
+        
+        // Mettre à jour toutes les heures
+        setInterval(calculateProgress, 3600000);
+    </script>
+</body>
+</html>
