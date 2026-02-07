@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service PC Sam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .intro {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .intro p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background-color: #e0e0e0;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gallery-caption h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .services {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .services h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .service-card {
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .service-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .service-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .service-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .features {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .features h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .budget {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .budget h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .budget p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .cta {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .cta h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .cta p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Service de Montage PC sur Mesure</h1>
+        <p>Votre Ordinateur Parfait, Assemblé Selon Vos Spécifications Exactes</p>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <p>Avec un an d'expérience dans l'assemblage de systèmes sur mesure, je propose des services professionnels de montage PC adaptés à vos besoins spécifiques—que vous soyez passionné de simulation de vol, joueur, ou professionnel nécessitant une station de travail performante.</p>
+        </div>
+
+        <h2 style="text-align: center; color: #667eea; margin-bottom: 30px; font-size: 2em;">Mes Réalisations</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="PCSAM.jpg" alt="PC Build 1">
+                <div class="gallery-caption">
+                    <h3>Configuration 1</h3>
+                    <p>Mon premier ordinateur, RYZEN 7 7800X3D, RX9070XT</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="PCGAB.jpg" alt="PC Build 2">
+                <div class="gallery-caption">
+                    <h3>Configuration 2</h3>
+                    <p>Ordinateur fait pour un ami, ryzen 5 9600x et 9060xt 16gb</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="services">
+            <h2>Ce Que Je Propose</h2>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Configurations Spécialisées</h3>
+                    <ul>
+                        <li>Systèmes de simulation de vol (ma spécialité)</li>
+                        <li>Ordinateurs gaming</li>
+                        <li>Stations de travail professionnelles</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Service Complet</h3>
+                    <ul>
+                        <li>Assemblage professionnel et gestion des câbles</li>
+                        <li>Installation du système d'exploitation</li>
+                        <li>Licence Windows incluse gratuitement</li>
+                        <li>Tests de qualité et optimisation</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Votre Choix de Priorité</h3>
+                    <ul>
+                        <li>Performance maximale (fonction avant forme)</li>
+                        <li>Builds esthétiques (systèmes magnifiques)</li>
+                        <li>Ou l'équilibre parfait entre les deux</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="features">
+                <h3>Pourquoi Choisir Mon Service ?</h3>
+                <ul>
+                    <li>Un an d'expérience confirmée</li>
+                    <li>Attention aux détails et travail de qualité</li>
+                    <li>Consultation personnalisée pour répondre à vos exigences</li>
+                    <li>Licence Windows gratuite (10 ou 11)</li>
+                    <li>Installation Linux disponible</li>
+                    <li>Tarification et communication transparentes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="budget">
+            <h2>Options de Budget Flexibles</h2>
+            <p>De 600€ à 1 600€</p>
+            <p style="font-size: 1.1em; margin-top: 15px;">Je travaille avec votre budget pour vous offrir le meilleur système possible selon vos besoins.</p>
+        </div>
+
+        <div class="cta">
+            <h2>Prêt à Construire Votre Ordinateur Idéal ?</h2>
+            <p>Contactez-moi dès aujourd'hui pour une consultation et un devis gratuits.</p>
+            <a href="mailto:samvdh@303.bg" class="cta-button">Me Contacter</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Services professionnels de montage PC partout en France. Composants de qualité, assemblage expert, vos spécifications.</p>
+        <p>&copy; 2025 - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
